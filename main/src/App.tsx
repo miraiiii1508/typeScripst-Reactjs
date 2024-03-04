@@ -1,14 +1,16 @@
-import { useReducer, useState } from "react";
+import { ElementRef, forwardRef, useReducer, useRef, useState } from "react";
 // import { TButtonType, TLibrary } from ".";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-
+type OtherComponentRef = ElementRef<typeof OtherComponent>;
 function App() {
   const [count, setCount] = useState<number>(1);
   // const [isOpen, setIsOpen] = useState<boolean>(() => Boolean(0));
+  const ref = useRef<OtherComponentRef>(null);
   return (
     <>
+      <OtherComponent ref={ref}>Hello</OtherComponent>
       <div>
         <a
           href="https://vitejs.dev"
@@ -87,8 +89,25 @@ function Counter() {
         Decrement age
       </button>
       <p>Hello! You are {state.age}.</p>
+      <Audio />
     </>
   );
 }
+function Audio() {
+  const audioRef = useRef<ElementRef<"audio">>(null);
+  const buttonRef = useRef<ElementRef<"button">>(null);
+  return (
+    <>
+      <audio ref={audioRef}></audio>
+      <button ref={buttonRef}></button>
+    </>
+  );
+}
+const OtherComponent = forwardRef<
+  HTMLTableElement,
+  { children: React.ReactNode }
+>(({ children }, ref) => {
+  return <table ref={ref}>{children}</table>;
+});
 
 export default App;
