@@ -2,10 +2,14 @@
 
 - useState
 - useReducer
-- useEffect
 - useRef
 
-# React.ReactNode vs JSX.Element vs React.ReactElement
+# Elements
+
+- React.ReactNode vs JSX.Element vs React.ReactElement
+- JSX.IntrinsicElements - React.DetailedHTMLProps
+- React.HTMLAttributes
+- HTMLElement
 
 # Props
 
@@ -14,22 +18,15 @@
 - ComponentPropsWithRef
 - How to Pass a Component as a Prop in React
 
-# Ref
-
-# ForwardRef
-
-- How To Use forwardRef With Generic Components
-
 # Generic
+
+- Generic
+- Generic with forwardRef
 
 # Event types
 
 # Fetching
 
-# Router
-
 # Type vs Interface
-
-# JSX.IntrinsicElements - React.DetailedHTMLProps
 
 # Exercises
