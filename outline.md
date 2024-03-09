@@ -7,7 +7,8 @@
 # Elements
 
 - React.ReactNode vs JSX.Element vs React.ReactElement
-- JSX.IntrinsicElements - React.DetailedHTMLProps
+- JSX.IntrinsicElements
+- React.DetailedHTMLProps
 - React.HTMLAttributes
 - HTMLElement
 

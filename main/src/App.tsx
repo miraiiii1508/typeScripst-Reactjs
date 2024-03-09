@@ -1,4 +1,11 @@
-import { ElementRef, forwardRef, useReducer, useRef, useState } from "react";
+import {
+  ComponentProps,
+  ElementRef,
+  forwardRef,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 // import { TButtonType, TLibrary } from ".";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
@@ -8,6 +15,16 @@ function App() {
   const [count, setCount] = useState<number>(1);
   // const [isOpen, setIsOpen] = useState<boolean>(() => Boolean(0));
   const ref = useRef<OtherComponentRef>(null);
+  console.log(
+    <a
+      href="https://vitejs.dev"
+      target="_blank"
+      // onClick={() => setIsOpen(1)}
+    >
+      <img src={viteLogo} className="logo" alt="Vite logo" />
+    </a>
+  );
+  // {type: "div", props: {}, key: null}
   return (
     <>
       <OtherComponent ref={ref}>Hello</OtherComponent>
@@ -38,6 +55,13 @@ function App() {
       </p>
       <Counter />
       {/* <Button /> */}
+      <Button onClick={() => 1} className="" type="button">
+        <div>hello</div>
+      </Button>
+      <Button>
+        <Counter />
+      </Button>
+      <Button type="button">{undefined}</Button>
     </>
   );
 }
@@ -85,6 +109,7 @@ function Counter() {
         onClick={() => {
           dispatch({ type: "decremented_age" });
         }}
+        type="button"
       >
         Decrement age
       </button>
@@ -93,6 +118,8 @@ function Counter() {
     </>
   );
 }
+// (property) JSX.IntrinsicElements.button: React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+
 function Audio() {
   const audioRef = useRef<ElementRef<"audio">>(null);
   const buttonRef = useRef<ElementRef<"button">>(null);
@@ -110,4 +137,18 @@ const OtherComponent = forwardRef<
   return <table ref={ref}>{children}</table>;
 });
 
+function Button({
+  children,
+  onClick,
+  ...rest
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+} & ComponentProps<"button">): JSX.Element {
+  return (
+    <button onClick={onClick} {...rest}>
+      {children}
+    </button>
+  );
+}
 export default App;
