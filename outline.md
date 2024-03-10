@@ -23,7 +23,6 @@
 
 - Generic
 - Generic with forwardRef
-- How to Pass a Component as a Prop in React(Advanced)
 
 # Event types
 
