@@ -9,6 +9,9 @@ type GetEventHandlers<T extends keyof JSX.IntrinsicElements> = Extract<
   keyof JSX.IntrinsicElements[T],
   `on${string}`
 >;
+// T: input, span, button, a, etc.
+// React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+// "onChange" | "onClick" etc.
 
 /**
  * Provides the event type for a given element and handler.

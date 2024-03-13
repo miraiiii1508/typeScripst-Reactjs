@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
   ComponentProps,
   ElementRef,
@@ -21,6 +22,9 @@ function App() {
   const [count, setCount] = useState<number>(1);
   // const [isOpen, setIsOpen] = useState<boolean>(() => Boolean(0));
   const ref = useRef<OtherComponentRef>(null);
+  // const handleChangeValue: ComponentProps<"input">["onChange"] = (e) => {
+  //   console.log(e);
+  // };
   const handleChangeValue = (e: EventFor<"input", "onChange">) => {
     console.log(e);
   };
