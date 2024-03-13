@@ -26,8 +26,16 @@
 
 # Event types
 
+- `DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,HTMLInputElement>`
+- `React.ChangeEvent<HTMLInputElement>`
+- `ComponentProps<"input">["onChange"]`
+
 # Fetching
 
 # Type vs Interface
 
 # Exercises
+
+```
+
+```

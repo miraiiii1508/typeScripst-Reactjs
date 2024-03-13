@@ -1,4 +1,4 @@
-import {
+import React, {
   ComponentProps,
   ElementRef,
   forwardRef,
@@ -7,14 +7,23 @@ import {
   useState,
 } from "react";
 // import { TButtonType, TLibrary } from ".";
+import { EventFor } from ".";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 type OtherComponentRef = ElementRef<typeof OtherComponent>;
+const data: { name: string; age: number }[] = [
+  { name: "evondev", age: 20 },
+  { name: "evondev", age: 20 },
+  { name: "evondev", age: 20 },
+];
 function App() {
   const [count, setCount] = useState<number>(1);
   // const [isOpen, setIsOpen] = useState<boolean>(() => Boolean(0));
   const ref = useRef<OtherComponentRef>(null);
+  const handleChangeValue = (e: EventFor<"input", "onChange">) => {
+    console.log(e);
+  };
   console.log(
     <a
       href="https://vitejs.dev"
@@ -27,7 +36,8 @@ function App() {
   // {type: "div", props: {}, key: null}
   return (
     <>
-      <OtherComponent ref={ref}>Hello</OtherComponent>
+      {/* <OtherComponent ref={ref}>Hello</OtherComponent> */}
+      <input onChange={(e) => handleChangeValue(e)} />
       <div>
         <a
           href="https://vitejs.dev"
@@ -55,7 +65,7 @@ function App() {
       </p>
       <Counter />
       {/* <Button /> */}
-      <Button onClick={() => 1} className="" type="button">
+      {/* <Button onClick={() => 1} className="" type="button">
         <div>hello</div>
       </Button>
       <Button>
@@ -64,7 +74,19 @@ function App() {
       <Button type="button">{undefined}</Button>
       <Status text="evondev" className="inline-block"></Status>
       <Row icon={UserIcon} />
-      <Tag tagName={"div"}></Tag>
+      <Tag tagName={"div"}></Tag> */}
+      {data.map((item) => (
+        <div>{item.name}</div>
+      ))}
+      <BoxedItemWithRef
+        data={[
+          {
+            job: "Frontend Developer",
+          },
+        ]}
+        renderData={(item) => <div>{item.job}</div>}
+      />
+      <BoxedItemWithRef data={[1]} renderData={(item) => <div>{item}</div>} />
     </>
   );
 }
@@ -214,4 +236,24 @@ function UserIcon() {
     </svg>
   );
 }
+function fixedForwardRef<T, P = Record<string, any>>(
+  render: (props: P, ref: React.Ref<T>) => React.ReactNode
+): (props: P & React.RefAttributes<T>) => React.ReactNode {
+  return React.forwardRef(render) as any;
+}
+// const BoxedItem2 = <T,>() => {}
+function BoxedItem<T>(
+  {
+    data,
+    renderData,
+  }: {
+    data: T[];
+    renderData: (item: T) => React.ReactNode;
+  },
+  ref: React.ForwardedRef<HTMLDivElement>
+) {
+  return <div ref={ref}>{data.map((item) => renderData(item))}</div>;
+}
+const BoxedItemWithRef = fixedForwardRef(BoxedItem);
+
 export default App;
