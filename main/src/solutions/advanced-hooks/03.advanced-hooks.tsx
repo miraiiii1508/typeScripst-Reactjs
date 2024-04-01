@@ -1,8 +1,17 @@
 import { appendVideoToDomAndPlay, fetchVideo } from "fake-external-lib";
 import { useEffect, useState } from "react";
+// Error
+type TState =
+  | {
+      status: "loading" | "loaded";
+    }
+  | {
+      status: "error";
+      error: Error;
+    };
 
 export const useLoadAsyncVideo = (src: string) => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<TState>({
     status: "loading",
   });
 
@@ -33,14 +42,11 @@ export const useLoadAsyncVideo = (src: string) => {
     };
   }, [src]);
 
-  // @ts-expect-error
   setState({ status: "error" });
 
-  // @ts-expect-error
-  setState({ status: "loading", error: new Error("error") });
+  setState({ status: "loading" });
 
-  // @ts-expect-error
-  setState({ status: "loaded", error: new Error("error") });
+  setState({ status: "loaded" });
 
   if (state.status === "error") {
     console.error(state.error);

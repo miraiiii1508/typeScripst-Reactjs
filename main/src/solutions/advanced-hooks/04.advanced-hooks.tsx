@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-
-export type Result<T> = [
-  "loading" | "success" | "error",
-  T | Error | undefined
-];
+// tuple
+export type Result<T> =
+  | ["loading", undefined?]
+  | ["success", T]
+  | ["error", Error];
 export const useData = <T,>(url: string): Result<T> => {
-  const [result, setResult] = useState<Result<T>>(["loading", undefined]);
+  const [result, setResult] = useState<Result<T>>(["loading"]);
 
   useEffect(() => {
     fetch(url)
