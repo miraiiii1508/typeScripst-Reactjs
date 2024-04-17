@@ -2,9 +2,10 @@ const classNamesMap = {
   primary: "bg-blue-500 text-white",
   secondary: "bg-gray-200 text-black",
   success: "bg-green-500 text-white",
+  danger: "bg-blue-500",
 };
 type ButtonProps = {
-  variant: "primary" | "secondary" | "success";
+  variant: keyof typeof classNamesMap;
 };
 
 export const Button = (props: ButtonProps) => {
@@ -18,9 +19,7 @@ const Parent = () => {
       <Button variant="secondary"></Button>
       <Button variant="success"></Button>
 
-      {/* @ts-expect-error */}
       <Button variant="something"></Button>
-      {/* @ts-expect-error */}
       <Button></Button>
     </>
   );

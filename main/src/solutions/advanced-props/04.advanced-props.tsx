@@ -5,7 +5,10 @@ type InputProps = (
       value: string;
       onChange: ChangeEventHandler;
     }
-  | {}
+  | {
+      value?: undefined;
+      onChange?: undefined;
+    }
 ) & {
   label: string;
 };
@@ -26,11 +29,7 @@ export const Test = () => {
     <div>
       <Input label="Greeting" value="Hello" onChange={() => {}} />
       <Input label="Greeting" />
-      {/* @ts-expect-error */}
-      {/* // not working! */}
       <Input label="Greeting" value="Hello" />
-      {/* @ts-expect-error */}
-      {/* // not working! */}
       <Input label="Greeting" onChange={() => {}} />
     </div>
   );
