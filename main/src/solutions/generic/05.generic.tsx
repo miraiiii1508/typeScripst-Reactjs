@@ -1,18 +1,19 @@
-export type ModalProps<TVariant extends PossibleVariants> = {
+export type ModalProps = {
   isOpen: boolean;
-  variant: TVariant;
-} & (TVariant extends "with-button"
-  ? {
+} & (
+  | {
+      variant: "with-button";
       buttonLabel: string;
       onButtonClick: () => void;
     }
-  : {});
+  | {
+      variant: "without-button";
+    }
+);
 
 export type PossibleVariants = "with-button" | "without-button";
 
-export const Modal = <TVariant extends PossibleVariants>(
-  props: ModalProps<TVariant>
-) => {
+export const Modal = (props: ModalProps) => {
   // ...
   return null;
 };
@@ -28,15 +29,9 @@ export const Parent = () => {
       ></Modal>
       <Modal isOpen variant="without-button"></Modal>
 
-      {/* @ts-expect-error */}
       <Modal isOpen variant="with-button"></Modal>
 
-      <Modal
-        isOpen
-        variant="without-button"
-        /* @ts-expect-error */
-        onButtonClick={() => {}}
-      />
+      <Modal isOpen variant="without-button" onButtonClick={() => {}} />
     </>
   );
 };

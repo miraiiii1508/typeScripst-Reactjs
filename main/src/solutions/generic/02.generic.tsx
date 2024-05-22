@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import { Equal, Expect } from "../../helpers/type-utils";
 
-interface TableProps {
-  rows: any[];
-  renderRow: (row: any) => ReactNode;
+interface TableProps<TData> {
+  rows: TData[];
+  renderRow: (row: TData) => ReactNode;
 }
 
-export const Table = (props: TableProps) => {
+export const Table = <TData,>(props: TableProps<TData>) => {
   return (
     <table>
       <tbody>
@@ -33,14 +33,7 @@ export const Parent = () => {
         rows={data}
         renderRow={(row) => {
           type test = Expect<Equal<typeof row, { id: number; name: string }>>;
-          return (
-            <td>
-              {
-                // @ts-expect-error
-                row.doesNotExist
-              }
-            </td>
-          );
+          return <td>{row.doesNotExist}</td>;
         }}
       ></Table>
     </div>

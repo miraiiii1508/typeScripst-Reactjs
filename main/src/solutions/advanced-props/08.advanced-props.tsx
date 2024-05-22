@@ -1,23 +1,24 @@
+import { ComponentProps } from "react";
+
 const buttonPropsMap = {
   reset: {
     className: "bg-blue-500 text-white",
     type: "reset",
-    // @ts-expect-error
-    illegalProperty: "whatever",
+    // illegalProperty: "whatever",
   },
   submit: {
     className: "bg-gray-200 text-black",
     type: "submit",
-    // @ts-expect-error
-    illegalProperty: "whatever",
+    // illegalProperty: "whatever",
   },
   next: {
     className: "bg-green-500 text-white",
     type: "button",
-    // @ts-expect-error
-    illegalProperty: "whatever",
+    // illegalProperty: "whatever",
   },
-};
+} satisfies Record<string, ComponentProps<"button">>;
+buttonPropsMap.next.className;
+// buttonPropsMap.reset.disabled;
 
 type ButtonProps = {
   variant: keyof typeof buttonPropsMap;
@@ -32,10 +33,8 @@ const Parent = () => {
       <Button variant="next"></Button>
       <Button variant="reset"></Button>
       <Button variant="submit"></Button>
-      {/* @ts-expect-error */}
-      <Button variant="something"></Button>
-      {/* @ts-expect-error */}
-      <Button></Button>
+      {/* <Button variant="something"></Button> */}
+      {/* <Button></Button> */}
     </>
   );
 };

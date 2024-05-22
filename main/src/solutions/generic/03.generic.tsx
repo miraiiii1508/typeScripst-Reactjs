@@ -25,15 +25,14 @@ interface User {
 }
 
 <>
-  <Table
-    // @ts-expect-error rows should be User[]
+  <Table<User>
     rows={[1, 2, 3]}
     renderRow={(row) => {
       type test = Expect<Equal<typeof row, User>>;
       return <td>{row.name}</td>;
     }}
   />
-  <Table
+  <Table<User>
     rows={[
       {
         id: 1,
@@ -41,7 +40,6 @@ interface User {
         age: 30,
       },
       {
-        // @ts-expect-error id should be string
         id: "2",
         name: "Jane",
         age: 30,

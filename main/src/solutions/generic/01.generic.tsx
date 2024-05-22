@@ -1,7 +1,36 @@
 import { useState } from "react";
 import { Equal, Expect } from "../../helpers/type-utils";
 
-export const useStateAsObject = (initial: any) => {
+// export const useStateAsObject = <T,>(initial: T) => {
+//   const [value, set] = useState(initial);
+
+//   return {
+//     value,
+//     set,
+//   };
+// };
+// export const useStateAsObject = <T,>(
+//   initial: T
+// ): {
+//   value: T;
+//   set: React.Dispatch<React.SetStateAction<T>>;
+// } => {
+//   const [value, set] = useState(initial);
+
+//   return {
+//     value,
+//     set,
+//   };
+// };
+// type TStateObject<T> = {
+//   value: T;
+//   set: React.Dispatch<React.SetStateAction<T>>;
+// };
+interface TStateObject<T> {
+  value: T;
+  set: React.Dispatch<React.SetStateAction<T>>;
+}
+export const useStateAsObject = <T,>(initial: T): TStateObject<T> => {
   const [value, set] = useState(initial);
 
   return {

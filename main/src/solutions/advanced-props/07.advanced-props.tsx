@@ -5,7 +5,8 @@ const presetSizes = {
 
 type Size = keyof typeof presetSizes;
 
-type LooseSize = Size | string;
+// eslint-disable-next-line @typescript-eslint/ban-types
+type LooseSize = Size | (string & {});
 
 export const Icon = (props: { size: LooseSize }) => {
   return (
@@ -24,4 +25,5 @@ export const Icon = (props: { size: LooseSize }) => {
   <Icon size="sm"></Icon>
   <Icon size="xs"></Icon>
   <Icon size="10px"></Icon>
+  <Icon size="xs" />
 </>;
